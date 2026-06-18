@@ -1,0 +1,107 @@
+// ── Angular Material theme (v3 / Angular 19) ───────────────────────────────
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: "'Inter', sans-serif",
+    plain-family: "'Inter', sans-serif",
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+html {
+  @include mat.all-component-themes($theme);
+}
+
+// ── Reset & base ────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f6fa;
+  color: #1e293b;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ── Utilitaires rapides ────────────────────────────────────────────────────
+.page-header {
+  margin-bottom: 28px;
+
+  &__breadcrumb {
+    display: flex; align-items: center; gap: 6px;
+    font-size: .8rem; color: #94a3b8; margin-bottom: 8px;
+    a { color: #1a3c6e; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
+
+  &__top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+
+  &__title { font-size: 1.5rem; font-weight: 700; color: #1e293b; line-height: 1.2; }
+  &__subtitle { font-size: .9rem; color: #64748b; margin-top: 4px; }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.section-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(26,60,110,.06);
+  overflow: hidden;
+  margin-bottom: 24px;
+
+  &__header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+
+  &__title {
+    font-size: 1rem; font-weight: 600; color: #1e293b;
+    display: flex; align-items: center; gap: 8px;
+    mat-icon { color: #1a3c6e; }
+  }
+
+  &__body { padding: 24px; }
+}
+
+// ── Table Material overrides ───────────────────────────────────────────────
+.mat-mdc-table {
+  width: 100%;
+
+  .mat-mdc-header-cell {
+    font-size: .75rem; font-weight: 700;
+    color: #64748b; text-transform: uppercase;
+    letter-spacing: .05em; background: #f8fafc;
+  }
+
+  .mat-mdc-row:hover { background: #fafbff; }
+}
+
+// ── Responsive ─────────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
